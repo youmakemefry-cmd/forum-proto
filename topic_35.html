@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рабочий форум - Демо</title>
+   <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f5f7; color: #333; }
+        .header { background: #2c3e50; color: white; padding: 15px; font-size: 18px; text-align: center; sticky; top: 0; z-index: 100; }
+        .container { display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; }
+        
+        /* Боковое меню сверху на мобилках */
+        .sidebar { background: white; padding: 15px; border-bottom: 2px solid #ddd; max-height: 300px; overflow-y: auto; }
+        
+        .content { padding: 15px; }
+        .topic-card { background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 15px; }
+        
+        /* Стилизация для удобных тапов пальцем */
+        .topic-link { display: block; padding: 12px; color: #34495e; text-decoration: none; border-bottom: 1px solid #eee; }
+        .btn { padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; background: #ddd; margin: 5px 5px 15px 0; font-weight: bold; }
+        .btn.active { background: #2980b9; color: white; }
+        
+        .photo-placeholder { background: #eee; height: 150px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; margin-top: 10px; border-radius: 8px; }
+
+        /* Для компьютеров возвращаем боковую панель */
+        @media (min-width: 768px) {
+            .container { flex-direction: row; padding: 20px; gap: 20px; }
+            .sidebar { width: 350px; border-radius: 8px; border: none; max-height: 80vh; position: sticky; top: 20px; }
+            .header { text-align: left; padding: 15px 40px; }
+        }
+    </style>
+    <script>
+        function filterPosts(type) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + type).classList.add('active');
+            
+            document.querySelectorAll('.post-reply').forEach(post => {
+                if (type === 'all') {
+                    post.style.display = 'flex';
+                } else {
+                    post.style.display = post.dataset.type === type ? 'flex' : 'none';
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="header">Штаб монтажа 2026 - [НГ25-26] Новый год</div>
+    <div class="container">
+<div class="sidebar">
+<div class="category"><div class="category-title">[Подрядчик] Наименование по договору</div>
+<a href="topic_№.html" class="topic-link">Наименование по договору — Адресная программа</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип СФ2</div>
+<a href="topic_1.html" class="topic-link">АХП тип СФ2 — СВАО, ПКиО "Лианозовский"</a>
+<a href="topic_2.html" class="topic-link">АХП тип СФ2 — СВАО, ПКиО "Бабушкнский"</a>
+<a href="topic_3.html" class="topic-link">АХП тип СФ2 — ЗАО, ПКиО "Фили" </a>
+<a href="topic_4.html" class="topic-link">АХП тип СФ2 — ЮВАО, ПКиО "Кузьминки"</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип СФ2.5</div>
+<a href="topic_5.html" class="topic-link">АХП тип СФ2.5 — ЦАО, Тверская улица, 21 </a>
+<a href="topic_6.html" class="topic-link">АХП тип СФ2.5 — ЗАО, Новозаводская ул., д. 27, ГБУК г. Москвы "Москонцерт"</a>
+<a href="topic_7.html" class="topic-link">АХП тип СФ2.5 — ЮЗАО, Ленинский проспект, д.105, ГБУК г. Москвы "Киноконцертный зал "Эльдар"</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип СФ4</div>
+<a href="topic_8.html" class="topic-link">АХП тип СФ4 — СВАО, Парк "Яуза", ул. Седова (бывший Лазоревый проезд)</a>
+<a href="topic_9.html" class="topic-link">АХП тип СФ4 — ЮЗАО, территория парка Южное Бутово</a>
+<a href="topic_10.html" class="topic-link">АХП тип СФ4 — ЮАО, от Симферопольского бульвара, 5/2 до Нахимовского проспекта, озелененная территория</a>
+<a href="topic_11.html" class="topic-link">АХП тип СФ4 — ЮАО, Корнеевские пруды, Бехтерева улица, 39/1, озелененная территория Парка</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип К17</div>
+<a href="topic_12.html" class="topic-link">АХП тип К17 — ЮАО, ГМЗ "Царицыно" </a>
+<a href="topic_13.html" class="topic-link">АХП тип К17 — ЮАО, ГМЗ "Царицыно" </a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип М10</div>
+<a href="topic_14.html" class="topic-link">АХП тип М10 — ЮАО, Сквер по Кавказскому бульвару (парк Сосенки)</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Клумба Шары+ Гирлянды</div>
+<a href="topic_15.html" class="topic-link">Клумба Шары+ Гирлянды — ЮАО, Ленинский проспект, д. 33</a>
+<a href="topic_16.html" class="topic-link">Клумба Шары+ Гирлянды — ЮАО, Ленинский проспект, д. 31 </a>
+<a href="topic_17.html" class="topic-link">Клумба Шары+ Гирлянды — ЮАО, Ленинский проспект, д. 27 + 29</a>
+<a href="topic_18.html" class="topic-link">Клумба Шары+ Гирлянды — ЮАО, Ленинский проспект, д. 21 </a>
+<a href="topic_19.html" class="topic-link">Клумба Шары+ Гирлянды — ЮАО, Ленинский проспект, д. 17</a>
+<a href="topic_20.html" class="topic-link">Клумба Шары+ Гирлянды — ЦАО, Ленинский проспект, д. 13 </a>
+<a href="topic_21.html" class="topic-link">Клумба Шары+ Гирлянды — ЦАО, Ленинский проспект, д. 11с1 </a>
+<a href="topic_22.html" class="topic-link">Клумба Шары+ Гирлянды — ЦАО, Ленинский проспект, д. 3 </a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Елки обнарядка герлянда</div>
+<a href="topic_23.html" class="topic-link">Елки обнарядка герлянда — Проспект Академика Сахарова, ул. Каланчёвская, д.14А, стр.1</a>
+<a href="topic_26.html" class="topic-link">Елки обнарядка герлянда — Щелковское шоссе, ул. Русаковская д. 24</a>
+<a href="topic_24.html" class="topic-link">Елки обнарядка герлянда — Щелковское шоссе , Ильинская Церковь</a>
+<a href="topic_25.html" class="topic-link">Елки обнарядка герлянда — Щелковское шоссе, РЖД Арена</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Сосна горная </div>
+<a href="topic_29.html" class="topic-link">Сосна горная  — Щелковское шоссе, ул. Русаковская д. 24</a>
+<a href="topic_27.html" class="topic-link">Сосна горная  — Щелковское шоссе , Ильинская Церковь</a>
+<a href="topic_28.html" class="topic-link">Сосна горная  — Щелковское шоссе, РЖД Арена</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Альп 10</div>
+<a href="topic_30.html" class="topic-link">Альп 10 — САО, Валдайский проезд, 16 (у Входа в киностудию)</a>
+<a href="topic_31.html" class="topic-link">Альп 10 — САО, Валдайский проезд, 11 (через дорогу)</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Альп 8</div>
+<a href="topic_.html" class="topic-link">Альп 8 — ЗАО, Мосфильмовская улица, 55</a>
+<a href="topic_32.html" class="topic-link">Альп 8 — СЗАО,Пехотная ул., 3, стр. 5 ( Больница №52)</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип Е9</div>
+<a href="topic_33.html" class="topic-link">АХП тип Е9 — Центральная улица, 15, местечко Сольба, Переславль-Залесский муниципальный округ, Ярославская область</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип Ф6</div>
+<a href="topic_34.html" class="topic-link">АХП тип Ф6 — САО, Валдайский проезд, 16 Группа №1</a>
+<a href="topic_35.html" class="topic-link">АХП тип Ф6 — САО, Валдайский проезд, 16 Группа №2</a>
+<a href="topic_36.html" class="topic-link">АХП тип Ф6 — САО, Валдайский проезд, 16  Группа №3</a>
+<a href="topic_37.html" class="topic-link">АХП тип Ф6 — САО, Валдайский проезд, 16 (около входа)</a>
+<a href="topic_38.html" class="topic-link">АХП тип Ф6 — СЗАО,Пехотная ул., 3, стр. 5 (Больница №52)</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] АХП тип LF(Ф6)</div>
+<a href="topic_39.html" class="topic-link">АХП тип LF(Ф6) — ЮАО, Донской Сквер</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип Ф6</div>
+<a href="topic_40.html" class="topic-link">АХП тип Ф6 — ЦАО, Крымский Вал улица, перед Музеоном (7 шт.)</a>
+<a href="topic_41.html" class="topic-link">АХП тип Ф6 — ЦАО, Садовая-Кудринская улица, 11 ФАС</a>
+<a href="topic_42.html" class="topic-link">АХП тип Ф6 — Уланский пер., 16, корп. 1  (ФАС)  (бывшее  ЦАО, Кузнецкий Мост улица)</a>
+<a href="topic_43.html" class="topic-link">АХП тип Ф6 — РЕЗЕРВ  (бывшее  ЦАО, Кузнецкий Мост улица)</a>
+<a href="topic_яё.html" class="topic-link">АХП тип Ф6 — ЦАО, Боровицкая площадь</a>
+<a href="topic_45.html" class="topic-link">АХП тип Ф6 — ЦАО, Богоявленский переулок </a>
+<a href="topic_46.html" class="topic-link">АХП тип Ф6 — ЦАО, Болотная площадь</a>
+<a href="topic_47.html" class="topic-link">АХП тип Ф6 — ЦАО, Новый Арбат улица / Садовое кольцо (6 шт.)</a>
+<a href="topic_48.html" class="topic-link">АХП тип Ф6 — ЦАО, Славянская площадь</a>
+<a href="topic_49.html" class="topic-link">АХП тип Ф6 — ЦАО, Новоспасский монастырь</a>
+<a href="topic_50.html" class="topic-link">АХП тип Ф6 — ЦАО, Московский зоопарк, вход от м. "Баррикадная" </a>
+<a href="topic_51.html" class="topic-link">АХП тип Ф6 — ЗАО, Новозаводская ул., д. 27, ГБУК г. Москвы "Москонцерт"</a>
+<a href="topic_52.html" class="topic-link">АХП тип Ф6 — ЮАО, Донской проезд, 21 (Донской монастырь)</a>
+<a href="topic_53.html" class="topic-link">АХП тип Ф6 — ЮЗАО, Ленинский проспект, д.105, ГБУК г. Москвы "Киноконцертный зал "Эльдар"</a>
+<a href="topic_54.html" class="topic-link">АХП тип Ф6 — ЮАО, ГМЗ "Царицыно"(Главный Вход (Визит Центр)</a>
+<a href="topic_55.html" class="topic-link">АХП тип Ф6 — ЮАО, ГМЗ "Царицыно" (Стадион Огонек)</a>
+<a href="topic_56.html" class="topic-link">АХП тип Ф6 — ЮАО, ГМЗ "Царицыно" (Плотина )</a>
+<a href="topic_57.html" class="topic-link">АХП тип Ф6 — ЮАО, ГМЗ "Царицыно" (Тюбинг )</a>
+<a href="topic_58.html" class="topic-link">АХП тип Ф6 — ЮАО, ГМЗ "Царицыно" (КПП 8)</a>
+<a href="topic_59.html" class="topic-link">АХП тип Ф6 — ЮВАО, Технополис Москва (Волгоградское шоссе 42)</a>
+<a href="topic_60.html" class="topic-link">АХП тип Ф6 — ВАО, улица Чечулина, 5 (Центр борьбы с туберкулёзом )</a>
+<a href="topic_61.html" class="topic-link">АХП тип Ф6 — СЗАО, Героев Панфиловцев 28 (ГБУЗ Детская городская клиническая больница имени З.А. Башляевой)</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] Яркая </div>
+<a href="topic_74.html" class="topic-link">Яркая  — ЦАО, Баррикадная метро</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип ЛЕМ</div>
+<a href="topic_62.html" class="topic-link">АХП тип ЛЕМ — СВАО, территория ВДНХ ( Проспект Мира 119с40)</a>
+<a href="topic_63.html" class="topic-link">АХП тип ЛЕМ — СВАО, территория ВДНХ (Останкино)</a>
+<a href="topic_64.html" class="topic-link">АХП тип ЛЕМ — СВАО, территория ВДНХ (Павильон №44 Кролиководство)</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип LT</div>
+<a href="topic_65.html" class="topic-link">АХП тип LT — ЮЗАО, Вернадского проспект, у цирка</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип Е55</div>
+<a href="topic_66.html" class="topic-link">АХП тип Е55 — ЮЗАО, Вернадского проспект (Цирк)</a>
+<a href="topic_67.html" class="topic-link">АХП тип Е55 — Зеленоград, префектура</a>
+<a href="topic_68.html" class="topic-link">АХП тип Е55 — ЦАО, Кудринская площадь</a>
+<a href="topic_69.html" class="topic-link">АХП тип Е55 — ЦАО, Краснопресненкая площадь</a>
+<a href="topic_70.html" class="topic-link">АХП тип Е55 — ЦАО, Дорогомиловская Застава площадь</a>
+<a href="topic_71.html" class="topic-link">АХП тип Е55 — ЦАО, Зубовская площадь (перед Счетной палатой)</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип Яркая</div>
+<a href="topic_72.html" class="topic-link">АХП тип Яркая — ЦАО,Рижская площадь (бывшее ЦАО, Цветной бульвар / Садовое кольцо)</a>
+<a href="topic_73.html" class="topic-link">АХП тип Яркая — ЦАО, Серпуховская площадь, у м. Добрынинская</a>
+<a href="topic_75.html" class="topic-link">АХП тип Яркая — ЦАО, Биржевая площадь, Гостиный двор</a>
+<a href="topic_76.html" class="topic-link">АХП тип Яркая — ЦАО, Сухаревская площадь</a>
+<a href="topic_77.html" class="topic-link">АХП тип Яркая — ЦАО,Таганская площадь </a>
+<a href="topic_78.html" class="topic-link">АХП тип Яркая — ЦАО, Красные ворота</a>
+<a href="topic_79.html" class="topic-link">АХП тип Яркая — САО, Северный речной вокзал</a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] АХП тип Пихта</div>
+<a href="topic_80.html" class="topic-link">АХП тип Пихта — СВАО, ул Космонавтов </a>
+<a href="topic_81.html" class="topic-link">АХП тип Пихта — СВАО, Парк «Яуза», Северодвинская улица </a>
+<a href="topic_82.html" class="topic-link">АХП тип Пихта — СВАО, Парк «Яуза», Сад будущего </a>
+<a href="topic_83.html" class="topic-link">АХП тип Пихта — СВАО, Парк «Яуза», Певческое поле  </a>
+<a href="topic_84.html" class="topic-link">АХП тип Пихта — СВАО, ВДНХ,1-я Останкинская улица, 7Ас21 (Останкино)</a>
+<a href="topic_85.html" class="topic-link">АХП тип Пихта — СВАО, ВДНХ, (Театр Сказок)</a>
+<a href="topic_86.html" class="topic-link">АХП тип Пихта — СЗАО, Проспект Маршала Жукова, д. 76 (ГБУК г. Москвы "ОКЦ СЗАО")</a>
+<a href="topic_88.html" class="topic-link">АХП тип Пихта — ЮАО, Загородное шоссе, 18А, стр.13 (ГБУЗ "ГКОБ № 1 ДЗМ") ( Бывшая ЮАО, ул. Медынская, напротив дома 12, кор.1)  </a>
+<a href="topic_89.html" class="topic-link">АХП тип Пихта — ЮАО, пересечение Шипиловской улицы и ул. Генерала Белова </a>
+<a href="topic_90.html" class="topic-link">АХП тип Пихта — ЮЗАО, Профсоюзная улица, м. Новые Черёмушки (Мосярмарка) </a>
+</div>
+<div class="category"><div class="category-title">[Энергосервис] Пихта</div>
+<a href="topic_87.html" class="topic-link">Пихта — ЮАО, ул. Шоссейная д. 92 СИЗО </a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип LF(Ф6)</div>
+<a href="topic_92.html" class="topic-link">АХП тип LF(Ф6) — ЦАО, Зубовская площадь, перед Счетной палатой</a>
+<a href="topic_91.html" class="topic-link">АХП тип LF(Ф6) — ЗАО, Кутузовский проспект, Поклонная гора</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип Е8</div>
+<a href="topic_93.html" class="topic-link">АХП тип Е8 — ЮВАО, Сквер у ст. м "Некрасовка"</a>
+<a href="topic_94.html" class="topic-link">АХП тип Е8 — ЦАО, РГГУ (Миусская площадь, 6с1)</a>
+<a href="topic_95.html" class="topic-link">АХП тип Е8 — САО, Ленинградское шоссе, 10 (Парк им.Воровского)</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип Е24</div>
+<a href="topic_96.html" class="topic-link">АХП тип Е24 — ЮЗАО, Ленинский проспект, 82-86</a>
+<a href="topic_97.html" class="topic-link">АХП тип Е24 — ТиНАО, с. Красная Пахра, Заводская улица, 20, «Звездный» (около ДК)</a>
+<a href="topic_98.html" class="topic-link">АХП тип Е24 — ТиНАО, Щербинка, Проектируемый проезд № 903"</a>
+<a href="topic_99.html" class="topic-link">АХП тип Е24 — ТиНАО, Поселение Новофедоровское, парк "Сосны"</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип Е37</div>
+<a href="topic_100.html" class="topic-link">АХП тип Е37 — ЮВАО, Люблинская улица, 53</a>
+<a href="topic_101.html" class="topic-link">АХП тип Е37 — ЮВАО, Совхозная улица, 6 (каток) ДЖКХ ОЭК</a>
+<a href="topic_102.html" class="topic-link">АХП тип Е37 — ЮВАО, Сквер им. Авдеева</a>
+<a href="topic_103.html" class="topic-link">АХП тип Е37 — ЮВАО, Сквер им. Чехова</a>
+<a href="topic_104.html" class="topic-link">АХП тип Е37 — Парк 850-летия Москвы</a>
+<a href="topic_105.html" class="topic-link">АХП тип Е37 — ЮВАО, Сквер им. Судакова</a>
+<a href="topic_106.html" class="topic-link">АХП тип Е37 — ЮВАО, парк Шкулёва (бывшая Люблинская улица / Тихая улица)</a>
+<a href="topic_107.html" class="topic-link">АХП тип Е37 — ЮВАО, Пешеходная зона 40 мкрн. Верхние поля улица, 35/3-5</a>
+<a href="topic_108.html" class="topic-link">АХП тип Е37 — ЮВАО, Генерала Кузнецова / Маршала Полубоярова улица (нопротив 2)</a>
+<a href="topic_109.html" class="topic-link">АХП тип Е37 — ЮВАО, Генерала Кузнецова улица (напротив 19) / Авиаконструктора Миля улица (ст. м. "Жулебино")</a>
+<a href="topic_110.html" class="topic-link">АХП тип Е37 — САО, Северное Тушино (быший Парк "Дубки" )</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип Е61-2</div>
+<a href="topic_111.html" class="topic-link">АХП тип Е61-2 — ЮВАО, 1-я Новокузьминская улица, 1 (театр им.Чихачева)</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип ЛЕБ</div>
+<a href="topic_112.html" class="topic-link">АХП тип ЛЕБ — СВАО, ВДНХ (каток) 1</a>
+<a href="topic_113.html" class="topic-link">АХП тип ЛЕБ — СВАО, ВДНХ (каток) 2</a>
+</div>
+<div class="category"><div class="category-title">[Призма] АХП тип Е6</div>
+<a href="topic_114.html" class="topic-link">АХП тип Е6 — СВАО, ВДНХ (каток) 6</a>
+</div>
+<div class="category"><div class="category-title">[КС-ПРОМ ] АХП тип Белт-лайт</div>
+<a href="topic_115.html" class="topic-link">АХП тип Белт-лайт — ЦАО, Тверской бульвар 19 (красная машина)</a>
+<a href="topic_116.html" class="topic-link">АХП тип Белт-лайт — ЦАО, Тверской бульвар 19 (Есенин)</a>
+<a href="topic_117.html" class="topic-link">АХП тип Белт-лайт — ЦАО, Тверской бульвар 19 (красные ротонды)</a>
+<a href="topic_118.html" class="topic-link">АХП тип Белт-лайт — ЦАО, Манежная площадь (около НГ42)</a>
+<a href="topic_119.html" class="topic-link">АХП тип Белт-лайт — ЦАО, Манежная площадь (НГ44)</a>
+</div>
+<div class="category"><div class="category-title">[КС-ПРОМ ]  АХП тип НГ-42</div>
+<a href="topic_120.html" class="topic-link"> АХП тип НГ-42 — ЦАО, Манежная площадь (Раус + шатер)</a>
+<a href="topic_120.html" class="topic-link"> АХП тип НГ-42 — ЦАО, Манежная площадь (Раус + шатер)</a>
+</div>
+<div class="category"><div class="category-title">[КС-ПРОМ ] АХП тип НГ-44</div>
+<a href="topic_121.html" class="topic-link">АХП тип НГ-44 — ЦАО, Манежная площадь (Раус)</a>
+<a href="topic_121.html" class="topic-link">АХП тип НГ-44 — ЦАО, Манежная площадь (Раус)</a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Бахрома вход</div>
+<a href="topic_38.html" class="topic-link">Бахрома вход — </a>
+<a href="topic_38.html" class="topic-link">Бахрома вход — </a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Олени</div>
+<a href="topic_38.html" class="topic-link">Олени — </a>
+</div>
+<div class="category"><div class="category-title">[Овермоно] Шарики</div>
+<a href="topic_38.html" class="topic-link">Шарики — </a>
+</div>
+<div class="category"><div class="category-title">[Зодиак] АХП тип А12</div>
+<a href="topic_115.html" class="topic-link">АХП тип А12 — ЦАО, ЦУМ</a>
+</div>
+<div class="category"><div class="category-title">[Зодиак] АХП тип А14</div>
+<a href="topic_116.html" class="topic-link">АХП тип А14 — ЦАО, Пушкинская площадь</a>
+</div>
+<div class="category"><div class="category-title">[Зодиак] АХП тип А15</div>
+<a href="topic_117.html" class="topic-link">АХП тип А15 — ЦАО, Новопушкинская площадь</a>
+</div>
+<div class="category"><div class="category-title">[КС-ПРОМ ] АХП тип Е72.1</div>
+<a href="topic_118.html" class="topic-link">АХП тип Е72.1 — АДРЕС НА СОГЛАСОВАНИИ</a>
+</div>
+<div class="category"><div class="category-title">[Зодиак] АХП тип Е72.2</div>
+<a href="topic_119.html" class="topic-link">АХП тип Е72.2 — АДРЕС НА СОГЛАСОВАНИИ</a>
+</div>
+</div>
+
+        <div class="content">
+            <h2>[Овермоно] АХП тип Ф6 — САО, Валдайский проезд, 16 Группа №2 (4)</h2>
+            
+            <div class="topic-card">
+                <div class="post">
+                    <div class="avatar" style="background: #2c3e50;">ОФ</div>
+                    <div class="post-content">
+                        <div class="post-header"><b>Система (Первое сообщение)</b></div>
+                        <h3>📋 Паспорт объекта</h3>
+                        <p><b>Округ:</b> САО<br>
+                        <b>Адрес:</b> САО, Валдайский проезд, 16 Группа №2<br>
+                        <b>Координаты:</b> <a href="https://yandex.ru/maps/?pt= 37.465983,55.869777&z=16&l=map" target="_blank">55.869777, 37.465983</a><br>
+                        <b>Статус:</b> 🟢 Смонтирован</p>
+                        <p><i>📄 Прикреплены файлы: ТЗ_АХП тип Ф6.pdf</i></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters">
+                <button id="btn-all" class="btn active" onclick="filterPosts('all')">Все отчеты</button>
+                <button id="btn-ko" class="btn" onclick="filterPosts('ko')">Только #КО</button>
+                <button id="btn-uo" class="btn" onclick="filterPosts('uo')">Только #УО</button>
+            </div>
+
+            <div class="topic-card post-reply" data-type="ko">
+                <div class="post">
+                    <div class="avatar">М</div>
+                    <div class="post-content">
+                        <div class="post-header"><span><b>Монтажник</b></span> <span>Вчера, 23:15</span></div>
+                        <p><span class="badge badge-ko">#КО</span> Осмотр проведен. Конструкция светится штатно, замечаний нет.</p>
+                        <div class="photo-placeholder">📸 Фото_КО_АХП тип Ф6.jpg</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topic-card post-reply" data-type="uo">
+                <div class="post">
+                    <div class="avatar" style="background: #e67e22;">Б</div>
+                    <div class="post-content">
+                        <div class="post-header"><span><b>Бригадир</b></span> <span>Сегодня, 02:30</span></div>
+                        <p><span class="badge badge-uo">#УО</span> Углубленный осмотр. Выявлен порыв гирлянды на нижнем ярусе. Требуется замена.</p>
+                        <div class="photo-placeholder">📸 Фото_УО_Дефект.jpg</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        </div></body></html>
